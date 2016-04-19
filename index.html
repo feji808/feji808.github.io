@@ -60,7 +60,7 @@
 					<li><a href="https://ca.linkedin.com/in/fejiodibo" class="icon fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
 					<li><a href="https://twitter.com/feji808" class="icon fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
 					<li><a href="https://www.instagram.com/ifeji" class="icon fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-					<li><a href="mailto:ifejiro@gmail.com" class="icon fa-envelope"><span class="label">Email</span></a></li>
+					<li><a href="mailto:me@fejiro.me" class="icon fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 			</footer>
 		</section>
@@ -184,16 +184,16 @@
 					<div class="container">
 						<h3>Contact Me</h3>
 						<p>Please feel free to contact me, I respond to all inquiries within one business day.</p>
-						<form method="post" action="#">
+						<form id="send-message" method="POST" action="#">
 							<div class="row uniform">
-								<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Your Name" /></div>
-								<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Your Email" /></div>
+								<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Your Name" required/></div>
+								<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Your Email" required/></div>
 							</div>
 							<div class="row uniform">
-								<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject" /></div>
+								<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject" required/></div>
 							</div>
 							<div class="row uniform">
-								<div class="12u"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+								<div class="12u"><textarea name="message" id="message" placeholder="Message" rows="5" required></textarea></div>
 							</div>
 							<div class="row uniform">
 								<div class="12u">
@@ -224,5 +224,34 @@
 		<script src="assets/js/util.js"></script>
 		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 		<script src="assets/js/main.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('form#send-message').submit(function(event) {
+                	$.ajax({
+					  type: "POST",
+					  url: "https://mandrillapp.com/api/1.0/messages/send.json",
+					  data: {
+					    "key": "bEWq5nOnNNF4w1wP7vh4Tg",
+					    "message": {
+						  "from_name": $('#name').val(),
+						  "from_email": $('#email').val(),
+					      "to": [
+					          {
+					            "email": "me@fejiro.me",
+					            "name": "Fejiro Odibo",
+					            "type": "to"
+					          }
+					      ],
+					      "subject": $('#subject').val(),
+					      "text": $('#message').val()
+					    }
+					  }
+					 }).done(function(response) {
+					   console.log(response); // if you're into that sorta thing
+					});
+					return false;
+            	});
+			});
+		</script>
 	</body>
 </html>
