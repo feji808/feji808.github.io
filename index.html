@@ -109,7 +109,7 @@
 						<p>A collection of my latest works and written materials that are publicly available.</p>
 						<div class="features">
 							<article>
-								<a href="documents/Embargoed-OAAG Awards Press Release 2015.pdf" class="image"><img src="images/portfolio-1.jpg" alt="OAAG Awards Press Release 2015" /></a>
+								<a href="documents/Embargoed-OAAG Awards Press Release 2015.pdf" class="image" target="_blank"><img src="images/portfolio-1.jpg" alt="OAAG Awards Press Release 2015" /></a>
 								<div class="inner">
 									<h4>OAAG Awards Press Release 2015</h4>
 									<p>Ontario Association of Art Galleries (OAAG) Awards 2015 press release.</p>
@@ -117,7 +117,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="http://feji808.github.io/techsoup-blogpost" class="image"><img src="images/portfolio-2.jpg" alt="TechSoup Canada Blog Post" /></a>
+								<a href="http://feji808.github.io/techsoup-blogpost" class="image" target="_blank"><img src="images/portfolio-2.jpg" alt="TechSoup Canada Blog Post" /></a>
 								<div class="inner">
 									<h4>TechSoup Canada Blog Post</h4>
 									<p>TechSoup Canada blog post on the topic of social media tips for non-profits.</p>
@@ -125,7 +125,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/BitcoinFeatureStory.pdf" class="image"><img src="images/portfolio-3.jpg" alt="Bitcoin Feature Story" /></a>
+								<a href="documents/BitcoinFeatureStory.pdf" class="image" target="_blank"><img src="images/portfolio-3.jpg" alt="Bitcoin Feature Story" /></a>
 								<div class="inner">
 									<h4>Bitcoin Feature Story</h4>
 									<p>Feature story on the topic of Bitcoin with an active graduate researcher in machine learning and finance,and Bitcoin community member.</p>
@@ -133,7 +133,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/Je ne suis pas Charlie.pdf" class="image"><img src="images/portfolio-4.jpg" alt="Issues Management: Charlie Hebdo" /></a>
+								<a href="documents/Je ne suis pas Charlie.pdf" class="image" target="_blank"><img src="images/portfolio-4.jpg" alt="Issues Management: Charlie Hebdo" /></a>
 								<div class="inner">
 									<h4>Issues Management: Charlie Hebdo</h4>
 									<p>The issue of Charlie Hebdo, where writers and cartoonists were killed for exercizing their Freedom of Expressions should resonate with all public relations practisioners.</p>
@@ -144,7 +144,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/the-national-ballet-of-canada.pdf" class="image"><img src="images/portfolio-5.jpg" alt="Internal Communications: The National Ballet" /></a>
+								<a href="documents/the-national-ballet-of-canada.pdf" class="image" target="_blank"><img src="images/portfolio-5.jpg" alt="Internal Communications: The National Ballet" /></a>
 								<div class="inner">
 									<h4>Internal Communications: The National Ballet</h4>
 									<p>Internal communications materials for the National Ballet of Canada.</p>
@@ -152,7 +152,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/lettertotheminister.pdf" class="image"><img src="images/portfolio-6.jpg" alt="Letter to the Minister: Digital Tracking Technology" /></a>
+								<a href="documents/lettertotheminister.pdf" class="image" target="_blank"><img src="images/portfolio-6.jpg" alt="Letter to the Minister: Digital Tracking Technology" /></a>
 								<div class="inner">
 									<h4>Letter to the Minister: Digital Tracking Technology</h4>
 									<p>Letter to the minister regarding the need for digital tracking technology legislation.</p>
@@ -160,7 +160,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/target-backgrounder.pdf" class="image"><img src="images/portfolio-7.jpg" alt="" /></a>
+								<a href="documents/target-backgrounder.pdf" class="image" target="_blank"><img src="images/portfolio-7.jpg" alt="" /></a>
 								<div class="inner">
 									<h4>Corporate Backgrounder: Target Canada Co.</h4>
 									<p>Corporate backgrounder for Target Canada, Canadian subsidiary of the United States-based department store chain Target Co.</p>
@@ -168,7 +168,7 @@
 								</div>
 							</article>
 							<article>
-								<a href="documents/balance brochure.pdf" class="image"><img src="images/portfolio-8.jpg" alt="Event Planning: Balance" /></a>
+								<a href="documents/balance brochure.pdf" class="image" target="_blank"><img src="images/portfolio-8.jpg" alt="Event Planning: Balance" /></a>
 								<div class="inner">
 									<h4>Event Planning: Balance</h4>
 									<p>Balance was an event in honour of Canadian Association Centre of Addiction and Mental Health focusing on work-life balance, with sponsors such as lululemon, fresh and wholefoods, including a yoga instructor courtesy of lululemon.</p>
@@ -198,7 +198,7 @@
 							<div class="row uniform">
 								<div class="12u">
 									<ul class="actions">
-										<li><input type="submit" class="special" value="Send Message" /></li>
+										<li><input id="submit-button" type="submit" class="special" value="Send Message" /></li>
 									</ul>
 								</div>
 							</div>
@@ -234,7 +234,7 @@
 					    "key": "bEWq5nOnNNF4w1wP7vh4Tg",
 					    "message": {
 						  "from_name": $('#name').val(),
-						  "from_email": $('#email').val(),
+						  "from_email": "message@fejiro.me",
 					      "to": [
 					          {
 					            "email": "me@fejiro.me",
@@ -242,12 +242,18 @@
 					            "type": "to"
 					          }
 					      ],
+					      "headers": {
+					        "Reply-To": $('#email').val()
+					      },
 					      "subject": $('#subject').val(),
 					      "text": $('#message').val()
 					    }
 					  }
 					 }).done(function(response) {
-					   console.log(response); // if you're into that sorta thing
+					   console.log(response);
+					   $('form#send-message').trigger('reset');
+					   $('#submit-button').prop('class', 'disabled');
+					   $('#submit-button').prop('value', 'Message Sent!');
 					});
 					return false;
             	});
